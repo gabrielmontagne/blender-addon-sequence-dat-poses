@@ -23,6 +23,11 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
     filename_ext = ".dat"
     filter_glob: StringProperty(default="*.dat", options={'HIDDEN'}, maxlen=255)
 
+    @classmethod
+    def poll(cls, context):
+        a = context.active_object
+        return a and a.type == 'ARMATURE'
+
     def execute(self, context):
         scene = context.scene
 
