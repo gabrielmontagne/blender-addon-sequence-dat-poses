@@ -1,4 +1,4 @@
-import bpy
+from bpy import ops
 from bpy.props import StringProperty, BoolProperty
 from bpy.types import Operator
 from bpy.utils import register_class, unregister_class
@@ -31,8 +31,12 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
 
     def execute(self, context):
         scene = context.scene
+        insert_auto = scene.tool_settings.use_keyframe_insert_auto
+        frame_current = scene.frame_current
+
         lib = context.active_object.pose_library
         markers = lib.pose_markers
+        scene.tool_settings.use_keyframe_insert_auto = True
 
         with open(self.properties.filepath, 'r') as f:
             not_found = set()
@@ -49,11 +53,13 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
                 print('yvar', i, f, t, p)
 
                 context.scene.frame_current = int(f)
-                bpy.ops.poselib.apply_pose(pose_index=i)
+                ops.poselib.apply_pose(pose_index=i)
 
             if not_found:
                 self.report({'WARNING'}, "Couldn't find {} poses".format(not_found))
 
+        scene.tool_settings.use_keyframe_insert_auto = insert_auto
+        scene.frame_current = frame_current 
         return {'FINISHED'}
 
 def register():

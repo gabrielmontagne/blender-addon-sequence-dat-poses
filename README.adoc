@@ -1,4 +1,11 @@
-= minimalist .dat pose application
+= Minimalist .dat pose application
 :revnumber: 0.0.1
 
 ★
+
+Create or load or link a pose library for which each pose is named like the position in the .dat file.
+Run the operator `animation.dat_sequence_animation` and selec your `.dat` file.
+This will auto-key in the poses on the corresponding frames.
+
+This is a hyperminimalist version of the famous "lip sync addon" with zero bells and zero whistles.
+Maybe just one.
