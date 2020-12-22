@@ -50,8 +50,6 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
                     continue
 
                 p = markers.get(t)
-                print('yvar', i, f, t, p)
-
                 context.scene.frame_current = int(f)
                 ops.poselib.apply_pose(pose_index=i)
 
@@ -63,9 +61,7 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
         return {'FINISHED'}
 
 def register():
-    print('Registering Seqnce DAT poses')
     register_class(ANIMATION_OT_sequence_dat_poses)
 
 def unregister():
-    print('Registering Seqnce DAT poses')
     unregister_class(ANIMATION_OT_sequence_dat_poses)
