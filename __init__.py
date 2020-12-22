@@ -8,7 +8,7 @@ from re import compile
 bl_info = {
     'name': 'Sequence .dat poses',
     'author': 'gabriel montagné, gabriel@tibas.london',
-    'version': (0, 0, 2),
+    'version': (0, 0, 3),
     'blender': (2, 80, 0),
     'description': "Applies .dat pose library names to selected bones",
     'category': 'Animation'
