@@ -1,5 +1,5 @@
 = Minimalist .dat pose application
-:revnumber: 0.0.1
+:revnumber: 0.0.2
 
 ★
 
