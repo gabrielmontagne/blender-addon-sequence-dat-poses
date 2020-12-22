@@ -9,3 +9,6 @@ This will auto-key in the poses on the corresponding frames.
 
 This is a hyperminimalist version of the famous "lip sync addon" with zero bells and zero whistles.
 Maybe just one.
+
+WARNING: please note that having `visual keying` on or off will produce different results.
+If nothing seems to be keying correcly, toggle it.
