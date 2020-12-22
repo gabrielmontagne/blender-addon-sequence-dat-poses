@@ -2,6 +2,7 @@ from bpy.props import StringProperty, BoolProperty
 from bpy.types import Operator
 from bpy_extras.io_utils import ExportHelper, ImportHelper
 from bpy.utils import register_class, unregister_class
+from re import compile
 
 bl_info = {
     'name': 'Sequence .dat poses',
@@ -11,6 +12,8 @@ bl_info = {
     'description': "Applies .dat pose library names to selected bones",
     'category': 'Animation'
 }
+
+dat_line = compile(r'^(\d+) (.*)')
 
 class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
     """Sequence poses from .dat animation file"""
@@ -25,7 +28,10 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
 
         with open(self.properties.filepath, 'r') as f:
             for line in f:
-                print('line', line.strip())
+                m = dat_line.fullmatch(line.strip())
+                if not m: continue
+                i, t = m.groups()
+                print('yvar', i, t)
 
         return {'FINISHED'}
 
