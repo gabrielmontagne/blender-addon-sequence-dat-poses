@@ -23,6 +23,7 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
 
     filename_ext = ".dat"
     filter_glob: StringProperty(default="*.dat", options={'HIDDEN'}, maxlen=255)
+    add_timeline_markers: BoolProperty(default=True)
 
     @classmethod
     def poll(cls, context):
@@ -50,14 +51,18 @@ class ANIMATION_OT_sequence_dat_poses(Operator, ImportHelper):
                     continue
 
                 p = markers.get(t)
-                context.scene.frame_current = int(f)
+                frame = int(f)
+                context.scene.frame_current = frame
                 ops.poselib.apply_pose(pose_index=i)
+
+                if self.add_timeline_markers:
+                    scene.timeline_markers.new(t, frame=frame)
 
             if not_found:
                 self.report({'WARNING'}, "Couldn't find {} poses".format(not_found))
 
         scene.tool_settings.use_keyframe_insert_auto = insert_auto
-        scene.frame_current = frame_current 
+        scene.frame_current = frame_current
         return {'FINISHED'}
 
 def register():
